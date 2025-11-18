@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import BookCard from "../components/BookCard";
 
 const HomeScreen = () => {
   return (
-    <View style={{ backgroundColor: "gold", flex: 1 }}>
-      <Text>HomeScreen</Text>
-    </View>
+    <SafeAreaView>
+      <BookCard />
+    </SafeAreaView>
   );
 };
 
