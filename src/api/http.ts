@@ -30,6 +30,7 @@ export const deleteBookByID = async ({ id, onSuccess, onError }) => {
     const response = await axios.delete(`${endpointURL}/${id}`);
     console.log(JSON.stringify(response.data, null, 3));
     onSuccess && onSuccess(response.data);
+    Alert.alert("Book Deleted Successfully");
   } catch (error) {
     onError && onError(error);
     console.log(error);
