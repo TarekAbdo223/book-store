@@ -3,31 +3,40 @@ import { Alert } from "react-native";
 
 const endpointURL = "https://69186e1521a96359487003a9.mockapi.io/books";
 
-const getListOfBooks = async () => {
-  const response = await axios.get(endpointURL);
-  console.log(JSON.stringify(response.data, null, 3));
+export const getListOfBooks = async ({ onSuccess, onError }) => {
+  try {
+    const response = await axios.get(endpointURL);
+    console.log(JSON.stringify(response.data, null, 3));
+    onSuccess && onSuccess();
+  } catch (error) {
+    onError && onError();
+    console.log(error);
+  }
 };
 
-const getBookByID = async (id: string) => {
+export const getBookByID = async ({ id, onSuccess, onError }) => {
   try {
     const response = await axios.get(`${endpointURL}/${id}`);
     console.log(JSON.stringify(response.data, null, 3));
+    onSuccess && onSuccess();
   } catch (error) {
+    onError && onError();
     console.log(error);
   }
 };
 
-const deleteBookByID = async (id: string) => {
+export const deleteBookByID = async ({ id, onSuccess, onError }) => {
   try {
     const response = await axios.delete(`${endpointURL}/${id}`);
     console.log(JSON.stringify(response.data, null, 3));
-    Alert.alert("Book deleted successfully");
+    onSuccess && onSuccess();
   } catch (error) {
+    onError && onError();
     console.log(error);
   }
 };
 
-const postBookDetails = async () => {
+export const postBookDetails = async ({ onSuccess, onError }) => {
   try {
     const response = await axios.post(endpointURL, {
       name_of_author: "tarek abdo",
@@ -35,18 +44,19 @@ const postBookDetails = async () => {
       cover: "https://via.placeholder.com/150",
       email_of_seller: "tarekabdo@gmail.com",
     });
-    Alert.alert("Book posted successfully");
+    onSuccess && onSuccess();
   } catch (error) {
-    Alert.alert("Error posting book");
+    onError && onError();
+    console.log(error);
   }
 };
 
-const updateBookByID = async (id: string, book: any) => {
+export const updateBookByID = async ({ id, book, onSuccess, onError }) => {
   try {
     const response = await axios.put(`${endpointURL}/${id}`, book);
-    Alert.alert("Book updated successfully");
-    getListOfBooks();
+    onSuccess && onSuccess();
   } catch (error) {
+    onError && onError();
     console.log(error);
   }
 };

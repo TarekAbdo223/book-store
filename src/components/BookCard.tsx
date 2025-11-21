@@ -18,10 +18,10 @@ const BookCard = () => {
 
       <View style={styles.deletEditContainer}>
         <TouchableOpacity style={styles.circleButton}>
-          <AntDesign name="delete" size={22} color="black" />
+          <AntDesign name="delete" size={20} color="red" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.circleButton}>
-          <FontAwesome name="edit" size={22} color="black" />
+          <FontAwesome name="edit" size={20} color="#25a" />
         </TouchableOpacity>
       </View>
     </View>
