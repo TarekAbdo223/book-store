@@ -1,11 +1,32 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import {
+  Alert,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
+import { getListOfBooks } from "../api/http";
 
 const HomeScreen = () => {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    getListOfBooks({
+      onSuccess: (books) => setBooks(books),
+      onError: (error) => Alert.alert(error),
+    });
+  }, []);
+
   return (
     <SafeAreaView>
-      <BookCard />
+      <FlatList
+        data={books}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <BookCard item={item} />}
+      />
     </SafeAreaView>
   );
 };

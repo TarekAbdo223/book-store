@@ -7,9 +7,9 @@ export const getListOfBooks = async ({ onSuccess, onError }) => {
   try {
     const response = await axios.get(endpointURL);
     console.log(JSON.stringify(response.data, null, 3));
-    onSuccess && onSuccess();
+    onSuccess && onSuccess(response.data);
   } catch (error) {
-    onError && onError();
+    onError && onError(error);
     console.log(error);
   }
 };
@@ -18,9 +18,9 @@ export const getBookByID = async ({ id, onSuccess, onError }) => {
   try {
     const response = await axios.get(`${endpointURL}/${id}`);
     console.log(JSON.stringify(response.data, null, 3));
-    onSuccess && onSuccess();
+    onSuccess && onSuccess(response.data);
   } catch (error) {
-    onError && onError();
+    onError && onError(error);
     console.log(error);
   }
 };
@@ -29,9 +29,9 @@ export const deleteBookByID = async ({ id, onSuccess, onError }) => {
   try {
     const response = await axios.delete(`${endpointURL}/${id}`);
     console.log(JSON.stringify(response.data, null, 3));
-    onSuccess && onSuccess();
+    onSuccess && onSuccess(response.data);
   } catch (error) {
-    onError && onError();
+    onError && onError(error);
     console.log(error);
   }
 };
@@ -44,9 +44,9 @@ export const postBookDetails = async ({ onSuccess, onError }) => {
       cover: "https://via.placeholder.com/150",
       email_of_seller: "tarekabdo@gmail.com",
     });
-    onSuccess && onSuccess();
+    onSuccess && onSuccess(response.data);
   } catch (error) {
-    onError && onError();
+    onError && onError(error);
     console.log(error);
   }
 };
@@ -54,9 +54,9 @@ export const postBookDetails = async ({ onSuccess, onError }) => {
 export const updateBookByID = async ({ id, book, onSuccess, onError }) => {
   try {
     const response = await axios.put(`${endpointURL}/${id}`, book);
-    onSuccess && onSuccess();
+    onSuccess && onSuccess(response.data);
   } catch (error) {
-    onError && onError();
+    onError && onError(error);
     console.log(error);
   }
 };

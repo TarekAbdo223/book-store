@@ -3,17 +3,14 @@ import React from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-const BookCard = () => {
+const BookCard = ({ item }) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: "https://picsum.photos/seed/YPxYoyu/1497/2201" }}
-        style={styles.coverImage}
-      />
+      <Image source={{ uri: item.cover }} style={styles.coverImage} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.bookName}>soul</Text>
-        <Text style={styles.authorName}>Olivia</Text>
-        <Text style={styles.bookPrice}>$24.00</Text>
+        <Text style={styles.bookName}>{item.book_title}</Text>
+        <Text style={styles.authorName}>{item.name_of_author}</Text>
+        <Text style={styles.bookPrice}>${item.price_of_book}</Text>
       </View>
 
       <View style={styles.deletEditContainer}>
