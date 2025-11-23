@@ -1,9 +1,14 @@
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import React from "react";
+import React, { use, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import AppTextInput from "../components/AppTextInput";
 
 const AddBookScreen = ({ onPress }) => {
+  const [name, setName] = useState();
+  const [author, setAuthor] = useState();
+  const [image, setImage] = useState();
+  const [price, setPrice] = useState();
+
   return (
     <SafeAreaView>
       <AntDesign
@@ -14,10 +19,27 @@ const AddBookScreen = ({ onPress }) => {
       />
       <View style={styles.body}>
         <Text style={styles.title}>Book Details</Text>
-        <AppTextInput placeholder="Book Name" />
-        <AppTextInput placeholder="Author Name" />
-        <AppTextInput placeholder="Cover Image" />
-        <AppTextInput placeholder="Book Price" />
+        <AppTextInput
+          placeholder="Book Name"
+          onChangeText={setName}
+          value={name}
+        />
+        <AppTextInput
+          placeholder="Author Name"
+          value={author}
+          onChange={setAuthor}
+        />
+        <AppTextInput
+          placeholder="Cover Image"
+          value={image}
+          onChange={setImage}
+        />
+        <AppTextInput
+          placeholder="Book Price"
+          value={price}
+          onChange={setPrice}
+          keyboardType={"numeric"}
+        />
       </View>
     </SafeAreaView>
   );
