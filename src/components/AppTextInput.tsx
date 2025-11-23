@@ -6,15 +6,24 @@ const AppTextInput = ({
   onChangeText,
   placeholder,
   keyboardType,
+  onChange, // Explicitly extract onChange to prevent conflicts - DO NOT pass to TextInput
   ...otherProps
 }) => {
+  // Ensure onChangeText receives a string, not an event
+  const handleChangeText = (text) => {
+    if (onChangeText && typeof text === "string") {
+      onChangeText(text);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
         value={value}
-        onChangeText={onChangeText}
         placeholder={placeholder}
         keyboardType={keyboardType}
+        onChangeText={handleChangeText}
+        // Explicitly exclude onChange to prevent conflicts
         {...otherProps}
       />
     </View>

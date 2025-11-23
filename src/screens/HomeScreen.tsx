@@ -20,7 +20,10 @@ const HomeScreen = () => {
   const getListOfBooksFN = () => {
     getListOfBooks({
       onSuccess: (books) => setBooks(books),
-      onError: (error) => Alert.alert(error),
+      onError: (error) => {
+        const errorMessage = error?.response?.data?.message || error?.message || "Failed to load books";
+        Alert.alert("Error", errorMessage);
+      },
     });
   };
 
@@ -33,7 +36,11 @@ const HomeScreen = () => {
     deleteBookByID({
       id: id,
       onSuccess: () => getListOfBooksFN(),
-      onError: (error) => console.log(error),
+      onError: (error) => {
+        const errorMessage = error?.response?.data?.message || error?.message || "Failed to delete book";
+        console.log("Error:", errorMessage);
+        Alert.alert("Error", errorMessage);
+      },
     });
   }
 

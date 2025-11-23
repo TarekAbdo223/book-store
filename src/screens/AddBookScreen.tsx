@@ -1,14 +1,28 @@
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Alert } from "react-native";
 import React, { use, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
+import { postBookDetails } from "../api/http";
 
 const AddBookScreen = ({ onPress }) => {
-  const [name, setName] = useState();
-  const [author, setAuthor] = useState();
-  const [image, setImage] = useState();
-  const [price, setPrice] = useState();
+  const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
+
+  const createBook = () => {
+    postBookDetails({
+      body: {
+        name_of_author: author,
+        price_of_book: price,
+        book_title: name,
+        cover: image,
+      },
+      onSuccess: () => onPress(),
+      onError: (err) => console.log(err),
+    });
+  };
 
   return (
     <SafeAreaView>
@@ -28,20 +42,20 @@ const AddBookScreen = ({ onPress }) => {
         <AppTextInput
           placeholder="Author Name"
           value={author}
-          onChange={setAuthor}
+          onChangeText={setAuthor}
         />
         <AppTextInput
           placeholder="Cover Image"
           value={image}
-          onChange={setImage}
+          onChangeText={setImage}
         />
         <AppTextInput
           placeholder="Book Price"
           value={price}
-          onChange={setPrice}
+          onChangeText={setPrice}
           keyboardType={"numeric"}
         />
-        <AppButton onPress={onPress} />
+        <AppButton onPress={createBook} />
       </View>
     </SafeAreaView>
   );

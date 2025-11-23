@@ -37,14 +37,9 @@ export const deleteBookByID = async ({ id, onSuccess, onError }) => {
   }
 };
 
-export const postBookDetails = async ({ onSuccess, onError }) => {
+export const postBookDetails = async ({ onSuccess, onError, body }) => {
   try {
-    const response = await axios.post(endpointURL, {
-      name_of_author: "tarek abdo",
-      price_of_book: 100,
-      cover: "https://via.placeholder.com/150",
-      email_of_seller: "tarekabdo@gmail.com",
-    });
+    const response = await axios.post(endpointURL, body);
     onSuccess && onSuccess(response.data);
   } catch (error) {
     onError && onError(error);
