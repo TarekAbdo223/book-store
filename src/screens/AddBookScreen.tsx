@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import React, { use, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import AppTextInput from "../components/AppTextInput";
+import AppButton from "../components/AppButton";
 
 const AddBookScreen = ({ onPress }) => {
   const [name, setName] = useState();
@@ -40,6 +41,7 @@ const AddBookScreen = ({ onPress }) => {
           onChange={setPrice}
           keyboardType={"numeric"}
         />
+        <AppButton onPress={onPress} />
       </View>
     </SafeAreaView>
   );
