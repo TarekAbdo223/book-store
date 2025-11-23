@@ -1,6 +1,7 @@
 import {
   Alert,
   FlatList,
+  Modal,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -9,9 +10,12 @@ import {
 import React, { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import { deleteBookByID, getListOfBooks } from "../api/http";
+import AddButton from "../components/AddButton";
+import AddBookScreen from "./AddBookScreen";
 
 const HomeScreen = () => {
   const [books, setBooks] = useState([]);
+  const [modalVisible, setModalVisisble] = useState(false);
 
   const getListOfBooksFN = () => {
     getListOfBooks({
@@ -42,6 +46,10 @@ const HomeScreen = () => {
           <BookCard item={item} onDelete={() => handleDelete(item.id)} />
         )}
       />
+      <AddButton onPress={() => setModalVisisble(true)} />
+      <Modal visible={modalVisible} animationType="slide">
+        <AddBookScreen onPress={() => setModalVisisble(false)} />
+      </Modal>
     </SafeAreaView>
   );
 };

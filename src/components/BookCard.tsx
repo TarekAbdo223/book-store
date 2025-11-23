@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   deletEditContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
   },
   circleButton: {
     width: 40,
