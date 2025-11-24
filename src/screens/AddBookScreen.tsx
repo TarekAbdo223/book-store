@@ -5,7 +5,7 @@ import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import { postBookDetails } from "../api/http";
 
-const AddBookScreen = ({ onPress }) => {
+const AddBookScreen = ({ onPress, onRefetchData }) => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [image, setImage] = useState("");
@@ -19,7 +19,9 @@ const AddBookScreen = ({ onPress }) => {
         book_title: name,
         cover: image,
       },
-      onSuccess: () => onPress(),
+      onSuccess: () => {
+        onPress(), onRefetchData();
+      },
       onError: (err) => console.log(err),
     });
   };

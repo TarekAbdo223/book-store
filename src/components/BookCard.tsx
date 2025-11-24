@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   circleButton: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     borderRadius: 20,
     backgroundColor: "#eee",
     alignItems: "center",
