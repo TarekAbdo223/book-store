@@ -3,7 +3,7 @@ import React from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-const BookCard = ({ item, onDelete }) => {
+const BookCard = ({ item, onDelete, onEdit }) => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: item.cover }} style={styles.coverImage} />
@@ -17,7 +17,7 @@ const BookCard = ({ item, onDelete }) => {
         <TouchableOpacity style={styles.circleButton} onPress={onDelete}>
           <AntDesign name="delete" size={20} color="red" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.circleButton}>
+        <TouchableOpacity style={styles.circleButton} onPress={onEdit}>
           <FontAwesome name="edit" size={20} color="#25a" />
         </TouchableOpacity>
       </View>

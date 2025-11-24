@@ -3,17 +3,37 @@ import React, { use, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
-import { postBookDetails } from "../api/http";
+import { postBookDetails, updateBookByID } from "../api/http";
 
-const AddBookScreen = ({ onPress, onRefetchData }) => {
-  const [name, setName] = useState("");
-  const [author, setAuthor] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState("");
+const AddBookScreen = ({ onPress, onRefetchData, selectedItem }) => {
+  const [name, setName] = useState(
+    selectedItem?.book_title ? selectedItem?.book_title : ""
+  );
+  const [author, setAuthor] = useState(selectedItem?.name_of_author ?? "");
+  const [image, setImage] = useState(selectedItem?.cover ?? "");
+  const [price, setPrice] = useState(selectedItem?.price_of_book ?? "");
+
+  console.log(selectedItem, "-------------------");
 
   const createBook = () => {
     postBookDetails({
       body: {
+        name_of_author: author,
+        price_of_book: price,
+        book_title: name,
+        cover: image,
+      },
+      onSuccess: () => {
+        onPress(), onRefetchData();
+      },
+      onError: (err) => console.log(err),
+    });
+  };
+
+  const editBook = () => {
+    updateBookByID({
+      id: selectedItem.id,
+      book: {
         name_of_author: author,
         price_of_book: price,
         book_title: name,
@@ -57,7 +77,7 @@ const AddBookScreen = ({ onPress, onRefetchData }) => {
           onChangeText={setPrice}
           keyboardType={"numeric"}
         />
-        <AppButton onPress={createBook} />
+        <AppButton onPress={selectedItem ? editBook : createBook} />
       </View>
     </SafeAreaView>
   );
